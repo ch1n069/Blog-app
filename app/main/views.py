@@ -1,23 +1,26 @@
-from flask import redirect,render_template,url_for
+from flask import redirect,render_template,url_for, flash
 from app.main import main
-from auth.forms import RegistrationForm , LoginForm
+from app.auth.forms import RegistrationForm , LoginForm
 #Views go here
 
     
 
 
 
-@main.route('/register')
+@main.route('/register' , methods=['GET', 'POST'])
 def register():
 
-    form = RegistrationForm()
+    forms = RegistrationForm()
 
+    if forms.validate_on_submit():
+        flash(f'Account created for {forms.username.data}!!', 'success')
+        return redirect(url_for('main.login'))
 
     '''This is the home page for the application'''
 
 
 
-    return render_template('register.html' ,title='Register' , form=form)
+    return render_template('register.html' ,title='Register' , forms=forms)
     
 
 
