@@ -3,6 +3,7 @@ from app.main import main
 from app import db , bcrypt
 from app.models import User, Post
 from app.auth.forms import RegistrationForm , LoginForm
+from flask_login import login_user
 #Views go here
 
     
@@ -37,14 +38,16 @@ def login():
 
 
     if forms.validate_on_submit():
-        if forms.email.data == "user@test.com" and forms.password.data == "password":
+        user  = User.query.filter_by(email=forms.email.data).first()
 
-            flash('You have been logged in', 'success')
+        if user and bcrypt.check_password_hash(user.password, forms.passwords.data):
+            login_user(user,remember=forms.remember.data)
             return redirect(url_for('main.index'))
-        else:
-            flash('Log in unsuccessful please check username and password', 'danger')
-    
 
+        else:
+
+            flash('Login unsuccessful', 'danger')
+           
 
 
     '''This is the home page for the application'''
