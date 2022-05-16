@@ -3,7 +3,7 @@ from app.main import main
 from app import db , bcrypt
 from app.models import User, Post
 from app.auth.forms import RegistrationForm , LoginForm
-from flask_login import login_user , current_user ,logout_user
+from flask_login import login_user , current_user ,logout_user, login_required
 
 #Views go here
 
@@ -74,6 +74,16 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
+
+@main.route('/account')
+@login_required
+def account():
+
+
+
+
+    return render_template('account.html', title='Account ')
 
 
 
