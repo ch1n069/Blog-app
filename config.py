@@ -24,11 +24,20 @@ class ProdConfig(Config):
 
 
 class DevConfig(Config):
+    '''
+    Development  configuration child class
+
+    Args:
+        Config: The parent configuration class with General configuration settings
+
+    '''
+
+
+
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:newpassword@localhost/blog'
 
 
     DEBUG = True
-
-
 
 
 class TestConfig(Config):
