@@ -1,6 +1,49 @@
 {% extends 'base.html' %} {% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+        {{forms.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4 text-center">Login</legend>
 
-<h1>this is the login page</h1>
+            <div class="form-group">
+                {{forms.email.label(class="form-control-label")}} {% if forms.email.errors %} {{forms.email(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in forms.email.errors %}
+                    <span>{{error}}</span> {% endfor %}
+                </div>
+                {% else %} {{forms.email(class="form-control form-control-lg")}} {% endif %}
+            </div>
+            <div class="form-group">
+                {{forms.password.label(class="form-control-label")}} {% if forms.password.errors %} {{forms.password(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in forms.password.errors %}
+                    <span>{{error}}</span> {% endfor %}
+                </div>
+                {% else %} {{forms.password(class="form-control form-control-lg")}} {% endif %}
+            </div>
+            <div class="form-check">
+                {{ forms.remember(class="form-check-input")}} {{ forms.remember.label(class="form-check-label")}}
 
+            </div>
+
+
+        </fieldset>
+        <div class="form-group mt-2">
+            {{forms.submit(class="btn btn-outline-primary")}}
+
+
+        </div>
+        <small class="text-muted ml-2">
+            <a href="">Forgot Password</a>
+        </small>
+
+    </form>
+</div>
+<div class="border-top pt-3">
+    <small class="already text-muted mx-5">
+        Do you need an account <a class="ml-2" href="{{url_for('main.register')}}">Sign up now</a>
+    </small>
+
+</div>
 
 {% endblock %}

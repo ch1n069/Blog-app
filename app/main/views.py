@@ -24,17 +24,28 @@ def register():
     
 
 
-@main.route('/login')
+@main.route('/login',  methods=['GET', 'POST'])
 def login():
 
-    form = LoginForm()
+    forms = LoginForm()
+
+
+    if forms.validate_on_submit():
+        if forms.email.data == "user@test.com" and forms.password.data == "password":
+
+            flash('You have been logged in', 'success')
+            return redirect(url_for('main.index'))
+        else:
+            flash('Log in unsuccessful please check username and password', 'danger')
+    
+
 
 
     '''This is the home page for the application'''
 
 
 
-    return render_template('login.html' ,title='Login' , form=form)
+    return render_template('login.html' ,title='Login' , forms=forms)
     
 
 
