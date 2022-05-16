@@ -6,5 +6,8 @@ def index():
 
 
     '''This is the home page for the application'''
+
+
+    
     return render_template('index.html')
     
