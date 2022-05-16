@@ -3,7 +3,8 @@ from app.main import main
 from app import db , bcrypt
 from app.models import User, Post
 from app.auth.forms import RegistrationForm , LoginForm
-from flask_login import login_user
+from flask_login import login_user , current_user ,logout_user
+
 #Views go here
 
     
@@ -12,6 +13,9 @@ from flask_login import login_user
 
 @main.route('/register' , methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated():
+        return redirect(url_for('main.index'))
+
 
     forms = RegistrationForm()
 
@@ -34,19 +38,26 @@ def register():
 @main.route('/login',  methods=['GET', 'POST'])
 def login():
 
+
+    if current_user.is_authenticated:
+
+
+        return redirect(url_for('main.index'))
+
+
     forms = LoginForm()
 
 
     if forms.validate_on_submit():
         user  = User.query.filter_by(email=forms.email.data).first()
 
-        if user and bcrypt.check_password_hash(user.password, forms.passwords.data):
+        if user and bcrypt.check_password_hash(user.password, forms.password.data):
             login_user(user,remember=forms.remember.data)
             return redirect(url_for('main.index'))
 
         else:
 
-            flash('Login unsuccessful', 'danger')
+            flash('Login unsuccessful please check email and password', 'danger')
            
 
 
@@ -56,6 +67,15 @@ def login():
 
     return render_template('login.html' ,title='Login' , forms=forms)
     
+
+
+
+@main.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('main.index'))
+
+
 
 
 
@@ -70,3 +90,4 @@ def index():
 
     return render_template('index.html')
     
+
