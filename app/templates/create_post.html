@@ -5,7 +5,7 @@
     <form method="POST" action="">
         {{forms.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4 text-center">Create post</legend>
+            <legend class="border-bottom mb-4 text-center">{{legend}}</legend>
 
             <div class="form-group">
                 {{forms.title.label(class="form-control-label")}} {% if forms.title.errors %} {{forms.title(class="form-control form-control-lg is-invalid")}}
@@ -23,17 +23,12 @@
                 </div>
                 {% else %} {{forms.content(class="form-control form-control-lg")}} {% endif %}
             </div>
-
-
-
         </fieldset>
         <div class="form-group mt-2">
-            {{forms.submit(class="btn btn-outline-primary")}}
+            {{forms.submit(class="btn btn-outline-info")}}
 
 
         </div>
-
-
     </form>
 </div>
 {% endblock content%}

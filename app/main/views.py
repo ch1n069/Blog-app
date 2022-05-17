@@ -1,4 +1,4 @@
-from flask import redirect,render_template,url_for, flash,request
+from flask import redirect,render_template,url_for, flash,request, abort
 from app.main import main
 from app import db , bcrypt
 from app.models import User, Post
@@ -9,6 +9,18 @@ from flask_login import login_user , current_user ,logout_user, login_required
 
     
 
+@main.route('/')
+def index():
+
+    posts  = Post.query.all()
+
+
+    '''This is the home page for the application'''
+
+
+
+    return render_template('index.html', posts= posts)
+    
 
 
 @main.route('/register' , methods=['GET', 'POST'])
@@ -103,32 +115,37 @@ def account():
 @login_required
 def new_post():
 
-    forms= PostForm()
+    forms = PostForm()
     if forms.validate_on_submit():
-        flash('post has been created')
+
+        post = Post(title=forms.title.data, content=forms.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+
+        flash('post has been created successfully.', 'success')
         return redirect(url_for('main.index'))
 
 
-
-
-    '''This is the home page for the application'''
-
-
-
-    return render_template('create_post.html' , title= "New post", forms=forms)
+    return render_template('create_post.html' , title= "New post", forms=forms, legend='New post')
     
 
 
-
-
-@main.route('/')
-def index():
-
-
-    '''This is the home page for the application'''
+@main.route('/post/<int:post_id>')
+def post(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html' , title= "Post.title", post=post)
 
 
 
-    return render_template('index.html')
-    
+@main.route('/post/<int:post_id>/update')
+def update_post(post_id):
+
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    forms = PostForm()
+    forms.title.data = post.title
+    forms.content.data = post.content
+    return render_template('create_post.html' , title= "update post", post=post ,forms=forms, legend='update post')
+
 
