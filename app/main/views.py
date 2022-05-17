@@ -137,15 +137,24 @@ def post(post_id):
 
 
 
-@main.route('/post/<int:post_id>/update')
+@main.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
 def update_post(post_id):
 
     post = Post.query.get_or_404(post_id)
     if post.author != current_user:
         abort(403)
     forms = PostForm()
-    forms.title.data = post.title
-    forms.content.data = post.content
+    if forms.validate_on_submit():
+        post.title = forms.title.data
+        post.content = forms.content.data
+        db.session.commit()
+        flash('your post has been updated', 'success')
+        return redirect(url_for('main.post', post_id=post.id ))
+
+    elif request.method == 'GET':
+
+        forms.title.data = post.title
+        forms.content.data = post.content
     return render_template('create_post.html' , title= "update post", post=post ,forms=forms, legend='update post')
 
 

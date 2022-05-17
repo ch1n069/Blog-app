@@ -11,5 +11,17 @@
     <p>{{post.content}}</p>
     <h3>{{post.date_posted.strftime('%y-%m-%d-%H:%M')}}</h3>
 
+    {% if post.author == current_user %}
+    <div>
+        <a class="btn btn-secondary btn-sm m-1" href="{{url_for('main.update_post', post_id=post.id)}}">Update</a>
+
+
+
+        <button type="button" class="btn btn-danger btn-sm m-1">Delete</button>
+    </div>
+
+
+    {% endif %}
+
 </div>
 {% endblock content %}
