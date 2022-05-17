@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script&family=Lato:ital,wght@1,900&family=Lobster&family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;0,800;1,100&family=Raleway:wght@600&family=Roboto+Condensed&family=Rye&display=swap');
+#hero {
+    background-image: url('https://images.pexels.com/photos/4552838/pexels-photo-4552838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=250&dpr=2');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 550px;
+    color: white;
+}
+
+#cardi {
+    height: 560px;
+    border: none;
+}
+
+.title {
+    font-size: 15px;
+    font-family: 'Poppins'
+}
+
+body {
+    background-color: black;
+}
+
+#protest1 {
+    margin-top: 10%;
+    font-family: 'Poppins';
+    font-size: 90px;
+    font-weight: bold;
+}
+
+#protest2 {
+    font-family: 'Poppins';
+}
+
+#protest2 p {
+    font-size: 10px;
+}
+
+.navbar a {
+    color: white;
+}

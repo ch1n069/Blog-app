@@ -17,11 +17,31 @@
 
 
 
-        <button type="button" class="btn btn-danger btn-sm m-1">Delete</button>
+        <button type="button" class="btn btn-danger btn-sm m-1 " data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
     </div>
 
 
     {% endif %}
+    <div>
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Are you sure you want to delete </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <form action="{{url_for('main.delete_post', post_id=post.id)}}" method="POST">
+                            <input type="submit" class="btn btn-danger" value="delete">
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 {% endblock content %}
