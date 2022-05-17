@@ -11,8 +11,9 @@ from flask_login import login_user , current_user ,logout_user, login_required
 
 @main.route('/')
 def index():
+    page = request.args.get('page', 1 , type=int)
 
-    posts  = Post.query.all()
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page,per_page=1)
 
 
     '''This is the home page for the application'''
@@ -49,6 +50,7 @@ def register():
 
 @main.route('/login',  methods=['GET', 'POST'])
 def login():
+
 
 
     if current_user.is_authenticated:
@@ -166,5 +168,5 @@ def delete_post(post_id):
         abort(403)
     db.session.delete(post)
     db.session.commit()
-    flash('Your post has been delete', 'success')
+    flash('Your post has been deleted', 'success')
     return redirect(url_for('main.index'))
