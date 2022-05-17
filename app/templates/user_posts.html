@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container mt-5">
+    <h1 class="mb-3">Post by {{user.username}} {{posts.total}}</h1>
+
+    <div class="row">
+        {% for post in posts.items %}
+        <div class="col">
+            <div id="cardi" class="cardi card" style="width: 18rem;">
+                <img src="https://images.pexels.com/photos/4664301/pexels-photo-4664301.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="card-img-top" alt="..." height="300">
+
+                <div class="card-body">
+                    <h3 class="title"><a href="{{url_for('main.post',post_id=post.id)}}">{{post.title}}</a></h3>
+                    <h6>
+                        <a href="{{url_for('main.user_posts', username=post.author.username)}}">{{post.author.username}}</a> </h6>
+                    <p>{{post.date_posted}}</p>
+                </div>
+            </div>
+
+
+        </div>
+        {% endfor %} {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %} {% if page_num %} {% if posts.page == page_num%}
+
+        <a class="btn btn-outline-warning mb-4 btn-sm" href="{{url_for('main.user_posts', username=user.username ,page=page_num)}}">{{page_num}}</a> {% else %}
+        <a class="btn btn-outline-info mb-4 btn-sm" href="{{url_for('main.user_posts', username=user.username, page=page_num)}}">{{page_num}}</a> {% endif %} {% else %} .... {% endif %} {% endfor %}
+    </div>
+</div>
+
+
+{% endblock content %}

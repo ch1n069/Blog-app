@@ -80,7 +80,7 @@
 
                     <div class="card-body">
                         <h3 class="title"><a href="{{url_for('main.post',post_id=post.id)}}">{{post.title}}</a></h3>
-                        <h6>{{post.author.username}}</h6>
+                        <h6><a href="{{url_for('main.user_posts', username=post.author.username)}}">{{post.author.username}}</a></h6>
                         <p>{{post.date_posted}}</p>
                     </div>
                 </div>
