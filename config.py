@@ -25,7 +25,7 @@ class ProdConfig(Config):
 
 
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:newpassword@localhost/blog'
 
     DEBUG = True
 
