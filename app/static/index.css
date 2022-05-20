@@ -7,6 +7,22 @@
     color: white;
 }
 
+#cont {
+    font-family: 'Poppins'
+}
+
+h6 {
+    font-family: 'Poppins';
+}
+
+#future a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-family: 'Poppins';
+    font-weight: bold;
+}
+
 #cardi {
     height: 560px;
     border: none;

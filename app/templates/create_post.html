@@ -16,7 +16,7 @@
                 {% else %} {{forms.title(class="form-control form-control-lg")}} {% endif %}
             </div>
             <div class="form-group">
-                {{forms.content.label(class="form-control-label")}} {% if forms.content.errors %} {{forms.content(7-lg is-invalid")}}
+                {{forms.content.label(class="form-control-label")}} {% if forms.content.errors %} {{forms.content(class="form-control form-control-lg is-invalid")}}
                 <div class="invalid-feedback">
                     {% for error in forms.content.errors %}
                     <span>{{error}}</span> {% endfor %}
