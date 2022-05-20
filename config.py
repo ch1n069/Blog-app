@@ -11,6 +11,7 @@ class Config:
 
 
 
+    DEBUG = True    
 
 
 
@@ -28,6 +29,8 @@ class ProdConfig(Config):
 
     DEBUG = True
 
+    pass
+
 
 
 
@@ -41,10 +44,9 @@ class DevConfig(Config):
 
     '''
 
-    
 
 
-
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:newpassword@localhost/blog'
 
 
     DEBUG = True
