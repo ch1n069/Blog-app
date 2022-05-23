@@ -1,6 +1,6 @@
 
 import unittest
-from app.models import User, Comment, Article, Quote, Subscriber
+from app.models import User, Comment, Post
 
 class QuoteTest(unittest.TestCase):
     def setUp(self):
